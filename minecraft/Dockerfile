@@ -1,5 +1,9 @@
-FROM Java:openjdk-8u72-jdk
-ADD BuildTools.jar /server
-WORKDIR /server
-RUN java -jar BuildTools.jar -rev 1.7.10
-CMD java -jar craftbukkit-1.8.6.jar
+FROM  java:openjdk-8u72
+MAINTAINER MyszAndPad
+ADD /craftbukkit.jar /
+ADD /eula_.txt /
+ENV PORT = 25565
+ENV SIZE=128
+ENV SLOTS=0
+ENV ONLINE-MODE=true
+CMD java -Xmx${SIZE}m -jar craftbukkit.jar --online-mode ${ONLINE-MODE} --size ${SLOTS} --port ${PORT} ; rm eula.txt ; mv eula_.txt eula.txt ; java -Xmx${SIZE}m -jar craftbukkit.jar --online-mode ${ONLINE-MODE} --size ${SLOTS} --port ${PORT}
